@@ -1,36 +1,33 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <!-- This line will disable the button if were on the first page -->
-    <li
-      [ngClass]="{ disabled: currentPage === 0}" 
-      class="page-item">
+    <li [ngClass]="{ disabled: currentPage === 0 }" class="page-item">
       <!-- This click event function takes the currentPage and minuses 1 -->
-      <a 
-        (click)="currentPage = currentPage - 1"
-        class="page-link">Prev</a>
+      <a (click)="currentPage = currentPage - 1" class="page-link">Prev</a>
     </li>
-    <li
-      class="page-item"
-      *ngFor="let image of images; let i = index"
-      [ngClass]="{ active: i === currentPage }"
-    >
-      <a 
-        (click)="currentPage = i"
-        class="page-link">{{ i + 1 }}</a>
-    </li>
+    <!-- NG-container exists so we can apply 2 structural directives to "1 element", because it doesnt actually create an element -->
+    <ng-container *ngFor="let image of images; let i = index">
+      <li
+        class="page-item"
+        *ngIf="i < 5"
+        [ngClass]="{ active: i === currentPage }"
+      >
+        <a (click)="currentPage = i" class="page-link">{{ i + 1 }}</a>
+      </li>
+    </ng-container>
+
     <!-- This line will disable the Next button if weere on the last page -->
-    <li 
-      [ngClass]="{ disabled: currentPage === images.length -1}"
-      class="page-item">
+    <li
+      [ngClass]="{ disabled: currentPage === images.length - 1 }"
+      class="page-item"
+    >
       <!-- This click event function takes the currentPage and adds 1 -->
-      <a 
-        (click)="currentPage = currentPage + 1"
-        class="page-link">Next</a>
+      <a (click)="currentPage = currentPage + 1" class="page-link">Next</a>
     </li>
   </ul>
 </nav>
 
 <div>
-  <h4> {{ images[currentPage].title }} </h4>
-  <img [src]="images[currentPage].url" alt="">
+  <h4>{{ images[currentPage].title }}</h4>
+  <img [src]="images[currentPage].url" alt="" />
 </div>
