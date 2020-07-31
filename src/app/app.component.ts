@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   currentPage = 0;
+  
+  checkWindowIndex(index: number){
+    return Math.abs(this.currentPage - index) < 5;
+  }
 
   images = [
     {

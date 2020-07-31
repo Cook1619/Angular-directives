@@ -9,7 +9,7 @@
     <ng-container *ngFor="let image of images; let i = index">
       <li
         class="page-item"
-        *ngIf="i < 5"
+        *ngIf="checkWindowIndex(i)"
         [ngClass]="{ active: i === currentPage }"
       >
         <a (click)="currentPage = i" class="page-link">{{ i + 1 }}</a>
@@ -27,7 +27,13 @@
   </ul>
 </nav>
 
-<div>
+<!-- <div>
   <h4>{{ images[currentPage].title }}</h4>
   <img [src]="images[currentPage].url" alt="" />
+</div> -->
+
+<div [ngSwitch]="currentPage">
+    <p *ngSwitchCase="0">Show index 0</p>
+    <p *ngSwitchCase="1">Show index 1</p>
+    <p *ngSwitchDefault>SHOW ME</p>
 </div>
